@@ -54,3 +54,34 @@ usermod --pass='*' root
 EOF
 
 rm -f "${ROOTFS_DIR}/etc/ssh/"ssh_host_*_key*
+
+on_chroot << EOF
+patch << 'EOG' /boot/config.txt
+--- config.txt	2019-01-17 06:23:28.000000000 -0800
++++ config copy.txt	2019-01-16 22:56:44.000000000 -0800
+@@ -11,10 +11,10 @@
+ 
+ # uncomment the following to adjust overscan. Use positive numbers if console
+ # goes off screen, and negative if there is too much border
+-#overscan_left=16
+-#overscan_right=16
+-#overscan_top=16
+-#overscan_bottom=16
++overscan_left=16
++overscan_right=16
++overscan_top=16
++overscan_bottom=16
+ 
+ # uncomment to force a console size. By default it will be display's size minus
+ # overscan.
+EOG
+EOF
+
+on_chroot << EOF
+# Shim doesn't install as root
+su pi
+curl https://raw.githubusercontent.com/arobb/pimoroni-onoffshim-headless/master/onoffshim.sh | bash -s -- -y
+if [[ "$(whoami)" != "root" ]]; then
+  exit # Drop su
+fi
+EOF
