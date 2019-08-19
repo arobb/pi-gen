@@ -78,6 +78,22 @@ EOG
 EOF
 
 on_chroot << EOF
+ #arm_freq=800
+
+ # Uncomment some or all of these to enable the optional hardware interfaces
+-#dtparam=i2c_arm=on
+-#dtparam=i2s=on
+-#dtparam=spi=on
++dtparam=i2c_arm=on
++dtparam=i2s=on
++dtparam=spi=on
+
+ # Uncomment this to enable the lirc-rpi module
+ #dtoverlay=lirc-rpi
+EOG
+EOF
+
+on_chroot << EOF
 # Shim doesn't install as root
 su pi
 curl https://raw.githubusercontent.com/arobb/pimoroni-onoffshim-headless/master/onoffshim.sh | bash -s -- -y
