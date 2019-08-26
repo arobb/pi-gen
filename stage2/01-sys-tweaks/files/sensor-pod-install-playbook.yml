@@ -1,0 +1,14 @@
+---
+- hosts: all
+  remote_user: root
+  vars:
+    gitPath: /git
+    piGenPath: "{{ gitPath }}/pi-gen"
+
+  tasks:
+    - name: sensor-packages
+      pip:
+        name:
+          - RPI.GPIO
+          - adafruit_blinka
+          - adafruit-circuitpython-ina219

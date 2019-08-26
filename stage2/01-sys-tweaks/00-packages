@@ -24,3 +24,7 @@ policykit-1
 ssh-import-id
 rng-tools
 ethtool
+ansible
+python3-pip
+python-smbus
+i2c-tools

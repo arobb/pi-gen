@@ -60,7 +60,7 @@ patch << 'EOG' /boot/config.txt
 --- config.txt	2019-01-17 06:23:28.000000000 -0800
 +++ config copy.txt	2019-01-16 22:56:44.000000000 -0800
 @@ -11,10 +11,10 @@
- 
+
  # uncomment the following to adjust overscan. Use positive numbers if console
  # goes off screen, and negative if there is too much border
 -#overscan_left=16
@@ -71,13 +71,17 @@ patch << 'EOG' /boot/config.txt
 +overscan_right=16
 +overscan_top=16
 +overscan_bottom=16
- 
+
  # uncomment to force a console size. By default it will be display's size minus
  # overscan.
 EOG
 EOF
 
 on_chroot << EOF
+patch << 'EOG' /boot/config.txt
+--- /boot/config.txt	2017-08-20 00:44:26.000000000 +0000
++++ ./config.txt	2019-08-19 04:36:43.790494373 +0000
+@@ -43,9 +43,9 @@
  #arm_freq=800
 
  # Uncomment some or all of these to enable the optional hardware interfaces
