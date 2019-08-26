@@ -107,6 +107,7 @@ rm -f "${ROOTFS_DIR}/etc/ssh/"ssh_host_*_key*
 # EOF
 
 install -m 744 files/sensor-pod-install-playbook.yml		"${ROOTFS_DIR}/tmp/"
+install -m 744 files/boot-config.txt.patch		"${ROOTFS_DIR}/tmp/"
 on_chroot << EOF
 ansible-playbook --connection=local /tmp/sensor-pod-install-playbook.yml
 EOF
