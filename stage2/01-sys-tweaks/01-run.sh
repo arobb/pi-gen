@@ -107,5 +107,5 @@ rm -f "${ROOTFS_DIR}/etc/ssh/"ssh_host_*_key*
 # EOF
 
 on_chroot << EOF
-ansible-playbook --connection=local 127.0.0.1 $PWD/files/sensor-pod-install-playbook.yml
+ansible-playbook --connection=local $PWD/files/sensor-pod-install-playbook.yml
 EOF

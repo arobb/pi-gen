@@ -1,13 +1,22 @@
 ---
-- hosts: all
+- hosts: 127.0.0.1
+  connection: local
   remote_user: root
   vars:
     gitPath: /git
     piGenPath: "{{ gitPath }}/pi-gen"
 
   tasks:
+    - name: apt-dependencies
+      apt:
+        name: "{{ packages }}"
+      vars:
+        packages:
+        - python3-pip
+
     - name: sensor-packages
       pip:
+        executable: pip3
         name:
           - RPI.GPIO
           - adafruit_blinka
