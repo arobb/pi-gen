@@ -12,3 +12,19 @@
           - RPI.GPIO
           - adafruit_blinka
           - adafruit-circuitpython-ina219
+
+    - name: patch-boot-config
+      patch:
+        src: "{{ gitPath }}/pi-gen/stage2/01-sys-tweaks/files/boot-config.txt.patch"
+        dest: /boot/config.txt
+
+    - name: get-shim-installer
+      get_url:
+        url: https://raw.githubusercontent.com/arobb/pimoroni-onoffshim-headless/master/onoffshim.sh
+        dest: /tmp/onoffshim.sh
+        mode: '0555'
+
+    - name: run-shim-installer
+      command: cat /tmp/onoffshim.sh | bash -s -- -y
+      become: yes
+      become_user: pi
