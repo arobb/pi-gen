@@ -24,8 +24,12 @@
 
     - name: patch-boot-config
       patch:
-        src: "{{ gitPath }}/pi-gen/stage2/01-sys-tweaks/files/boot-config.txt.patch"
+        src: "/tmp/boot-config.txt.patch"
         dest: /boot/config.txt
+
+    - name: force-ca-update
+      command: apt update && apt install -y --reinstall ca-certificates
+      become: yes
 
     - name: get-shim-installer
       get_url:
