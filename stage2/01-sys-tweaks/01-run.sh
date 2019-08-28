@@ -106,8 +106,34 @@ rm -f "${ROOTFS_DIR}/etc/ssh/"ssh_host_*_key*
 # fi
 # EOF
 
+echo "Update CA Certificate package in this environment"
+if [ ! -f /tmp/ca-certs-updated.touch ]; then
+  apt update && apt install -y --reinstall ca-certificates
+  result=$?
+
+  if [ "$result" -ne "0" ]; then
+    echo "Update of CA Certificates failed, cannot continue Sensor Pod build"
+    exit 1
+  else
+    touch /tmp/ca-certs-updated.touch
+  fi
+fi
+
+echo "Download the shim installer"
+if [ ! -f files/onoffshim.sh ]; then
+  curl --silent -L --output files/onoffshim.sh https://raw.githubusercontent.com/arobb/pimoroni-onoffshim-headless/master/onoffshim.sh
+  result=$?
+
+  if [ "$result" -ne "0" ]; then
+    echo "Shim download failed, cannot continue Sensor Pod build"
+    exit 1
+  fi
+fi
+
+echo "Run Sensor Pod Ansible Playbook"
 install -m 744 files/sensor-pod-install-playbook.yml		"${ROOTFS_DIR}/tmp/"
 install -m 744 files/boot-config.txt.patch		"${ROOTFS_DIR}/tmp/"
+install -m 755 files/onoffshim.sh		"${ROOTFS_DIR}/tmp/"
 on_chroot << EOF
 ansible-playbook --connection=local /tmp/sensor-pod-install-playbook.yml
 EOF

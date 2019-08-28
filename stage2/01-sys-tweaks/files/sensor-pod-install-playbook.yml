@@ -27,17 +27,7 @@
         src: "/tmp/boot-config.txt.patch"
         dest: /boot/config.txt
 
-    - name: force-ca-update
-      command: apt update && apt install -y --reinstall ca-certificates
-      become: yes
-
-    - name: get-shim-installer
-      get_url:
-        url: https://raw.githubusercontent.com/arobb/pimoroni-onoffshim-headless/master/onoffshim.sh
-        dest: /tmp/onoffshim.sh
-        mode: '0555'
-
     - name: run-shim-installer
-      command: cat /tmp/onoffshim.sh | bash -s -- -y
+      command: bash -c 'cat /tmp/onoffshim.sh | bash -s -- -y'
       become: yes
       become_user: pi
