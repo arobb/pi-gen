@@ -27,6 +27,12 @@
         src: "/tmp/boot-config.txt.patch"
         dest: /boot/config.txt
 
+    - name: Reported OS Version
+      command: cat /etc/os-release
+      register: osinfo
+
+    - debug: msg="{{ osinfo.stdout }}"
+
     - name: Run Pimoroni OnOffShim Installer
       command: bash -c 'cat /tmp/onoffshim.sh | bash -s -- -y'
       become: yes
