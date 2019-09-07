@@ -22,7 +22,7 @@
           - adafruit_blinka
           - adafruit-circuitpython-ina219
 
-    - name: patch-boot-config
+    - name: Patch Boot Config
       patch:
         src: "/tmp/boot-config.txt.patch"
         dest: /boot/config.txt
