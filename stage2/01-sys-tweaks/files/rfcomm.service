@@ -1,0 +1,12 @@
+# https://hacks.mozilla.org/2017/02/headless-raspberry-pi-configuration-over-bluetooth/
+
+[Unit]
+Description=RFCOMM service
+After=bluetooth.service
+Requires=bluetooth.service
+
+[Service]
+ExecStart=/usr/bin/rfcomm watch hci0 1 getty rfcomm0 115200 vt100 -a pi
+
+[Install]
+WantedBy=multi-user.target

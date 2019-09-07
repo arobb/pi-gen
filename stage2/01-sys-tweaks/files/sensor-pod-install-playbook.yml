@@ -27,6 +27,16 @@
         src: "/tmp/boot-config.txt.patch"
         dest: /boot/config.txt
 
+    - name: Patch Bluetooth Config
+      patch:
+        src: /tmp/bluetooth.service.patch
+        dest: /lib/systemd/system/bluetooth.service
+
+    - name: Enable RFComm Service
+      systemd:
+        name: rfcomm
+        enabled: yes
+
     - name: Reported OS Version
       command: cat /etc/os-release
       register: osinfo

@@ -82,7 +82,9 @@ fi
 echo "Run Sensor Pod Ansible Playbook"
 install -m 744 files/sensor-pod-install-playbook.yml		"${ROOTFS_DIR}/tmp/"
 install -m 744 files/boot-config.txt.patch		"${ROOTFS_DIR}/tmp/"
+install -m 744 files/bluetooth.service.patch		"${ROOTFS_DIR}/tmp/"
 install -m 755 files/onoffshim.sh		"${ROOTFS_DIR}/tmp/"
+install -m 755 files/rfcomm.service		"${ROOTFS_DIR}/etc/systemd/system/rfcomm.service"
 on_chroot << EOF
 ansible-playbook --connection=local /tmp/sensor-pod-install-playbook.yml
 EOF

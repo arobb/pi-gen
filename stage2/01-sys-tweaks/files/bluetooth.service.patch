@@ -1,0 +1,13 @@
+--- /lib/systemd/system/bluetooth.service	2016-05-27 10:46:43.000000000 +0000
++++ ./bluetooth.service	2019-09-07 21:14:33.284473378 +0000
+@@ -5,7 +5,9 @@
+ [Service]
+ Type=dbus
+ BusName=org.bluez
+-ExecStart=/usr/lib/bluetooth/bluetoothd
++ExecStart=/usr/lib/bluetooth/bluetoothd -C
++ExecStartPost=/usr/bin/sdptool add SP
++ExecStartPost=/bin/hciconfig hci0 piscan
+ NotifyAccess=main
+ #WatchdogSec=10
+ #Restart=on-failure
