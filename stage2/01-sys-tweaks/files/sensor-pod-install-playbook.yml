@@ -7,14 +7,14 @@
     piGenPath: "{{ gitPath }}/pi-gen"
 
   tasks:
-    - name: apt-dependencies
+    - name: Install Apt Dependencies
       apt:
         name: "{{ packages }}"
       vars:
         packages:
         - python3-pip
 
-    - name: sensor-packages
+    - name: Install Sensor Packages
       pip:
         executable: pip3
         name:
@@ -27,7 +27,7 @@
         src: "/tmp/boot-config.txt.patch"
         dest: /boot/config.txt
 
-    - name: run-shim-installer
+    - name: Run Pimoroni OnOffShim Installer
       command: bash -c 'cat /tmp/onoffshim.sh | bash -s -- -y'
       become: yes
       become_user: pi
