@@ -26,12 +26,12 @@
 
     - name: Patch Boot Config
       patch:
-        src: "/tmp/boot-config.txt.patch"
+        src: "{{ playbook_dir }}/boot-config.txt.patch"
         dest: /boot/config.txt
 
     - name: Patch Bluetooth Config
       patch:
-        src: /tmp/bluetooth.service.patch
+        src: "{{ playbook_dir }}/bluetooth.service.patch"
         dest: /lib/systemd/system/bluetooth.service
 
     - name: Enable RFComm Service
