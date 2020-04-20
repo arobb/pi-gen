@@ -34,9 +34,22 @@
         src: "{{ playbook_dir }}/bluetooth.service.patch"
         dest: /lib/systemd/system/bluetooth.service
 
+    - name: Touch Module Blacklist
+      file:
+        path: /etc/modprobe.d/raspi-blacklist.conf
+        state: touch
+        owner: root
+        group: root
+        mode: u=rw,g=r,o=r
+
     - name: Enable RFComm Service
       systemd:
         name: rfcomm
+        enabled: yes
+
+    - name: Enable SSH
+      systemd:
+        name: sshd
         enabled: yes
 
     - name: Reported OS Version
