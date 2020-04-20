@@ -24,6 +24,10 @@ policykit-1
 ssh-import-id
 rng-tools
 ethtool
+vl805fw
+ntfs-3g
+pciutils
+rpi-eeprom
 ansible
 python3-pip
 python-smbus
