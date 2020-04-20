@@ -3,6 +3,7 @@
   connection: local
   remote_user: root
   vars:
+    env: dev  # dev
     gitPath: /git
     piGenPath: "{{ gitPath }}/pi-gen"
 
@@ -12,6 +13,7 @@
         name: "{{ packages }}"
       vars:
         packages:
+        - vim
         - python3-pip
 
     - name: Install Sensor Packages
